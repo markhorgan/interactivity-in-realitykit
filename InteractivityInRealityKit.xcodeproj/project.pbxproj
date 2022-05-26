@@ -13,6 +13,7 @@
 		4D6383EC283F80BE00501D4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6383EB283F80BE00501D4C /* Assets.xcassets */; };
 		4D6383EF283F80BE00501D4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6383EE283F80BE00501D4C /* Preview Assets.xcassets */; };
 		4D6383F6283F810200501D4C /* CustomARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6383F5283F810200501D4C /* CustomARView.swift */; };
+		4D6383F8283FB8B900501D4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6383F7283FB8B900501D4C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		4D6383EB283F80BE00501D4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D6383EE283F80BE00501D4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4D6383F5283F810200501D4C /* CustomARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomARView.swift; sourceTree = "<group>"; };
+		4D6383F7283FB8B900501D4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				4D6383E9283F80BC00501D4C /* Experience.rcproject */,
 				4D6383EB283F80BE00501D4C /* Assets.xcassets */,
 				4D6383ED283F80BE00501D4C /* Preview Content */,
+				4D6383F7283FB8B900501D4C /* Extensions.swift */,
 			);
 			path = InteractivityInRealityKit;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6383F8283FB8B900501D4C /* Extensions.swift in Sources */,
 				4D6383E8283F80BC00501D4C /* ContentView.swift in Sources */,
 				4D6383E6283F80BC00501D4C /* AppDelegate.swift in Sources */,
 				4D6383F6283F810200501D4C /* CustomARView.swift in Sources */,

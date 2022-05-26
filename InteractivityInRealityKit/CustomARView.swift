@@ -10,6 +10,7 @@ import ARKit
 
 class CustomARView: ARView, ARSessionDelegate {
     private var showARPlanes = true
+    private var placedBox = false
     private let arPlaneMaterial = SimpleMaterial(color: .init(white: 1.0, alpha: 0.5), isMetallic: false)
     private var anchorEntitiesByAnchor: [ARAnchor: AnchorEntity] = [:]
     
@@ -20,6 +21,8 @@ class CustomARView: ARView, ARSessionDelegate {
         config.planeDetection = [.horizontal]
         session.delegate = self
         session.run(config, options: [])
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
         addCoaching()
     }
@@ -59,6 +62,50 @@ class CustomARView: ARView, ARSessionDelegate {
             if let planeAnchor = anchor as? ARPlaneAnchor, let anchorEntity = anchorEntitiesByAnchor[planeAnchor] {
                 scene.removeAnchor(anchorEntity)
                 anchorEntitiesByAnchor.removeValue(forKey: planeAnchor)
+            }
+        }
+    }
+    
+    @IBAction func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard gestureRecognizer.view != nil else { return }
+        
+        // Carry out the action when the user lifts their finger
+        if gestureRecognizer.state == .ended {
+            let screenLocation = gestureRecognizer.location(in: self)
+            if !placedBox {
+                let results = raycast(from: screenLocation, allowing: .existingPlaneInfinite, alignment: .horizontal)
+                if results.count > 0, let planeAnchor = results[0].anchor as? ARPlaneAnchor {
+                    showARPlanes = false
+                    removePlaneEntities(planeAnchor: planeAnchor)
+                    addBox(raycastResult: results[0])
+                }
+            }
+        }
+    }
+    
+    private func addBox(raycastResult: ARRaycastResult) {
+        if let planeAnchor = raycastResult.anchor as? ARPlaneAnchor, let anchorEntity = anchorEntitiesByAnchor[planeAnchor] {
+            let box = ModelEntity(mesh: .generateBox(size: 0.1), materials: [SimpleMaterial(color: .red, isMetallic: false)])
+            box.position = raycastResult.worldTransform.position
+            anchorEntity.addChild(box)
+            placedBox = true
+        }
+    }
+    
+    private func removePlaneEntities(planeAnchor: ARPlaneAnchor) {
+        // Remove anchor entities except the one that is passed
+        if let currentFrame = session.currentFrame {
+            for itPlaneAnchor in currentFrame.anchors {
+                if itPlaneAnchor != planeAnchor {
+                    if let anchorEntity = anchorEntitiesByAnchor[itPlaneAnchor] {
+                        scene.removeAnchor(anchorEntity)
+                        anchorEntitiesByAnchor.removeValue(forKey: itPlaneAnchor)
+                    }
+                }
+            }
+            // Remove the visualized plane of the anchor entity that is passed
+            if let anchorEntity = anchorEntitiesByAnchor[planeAnchor] {
+                anchorEntity.children.remove(at: 0)
             }
         }
     }
