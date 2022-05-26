@@ -79,16 +79,29 @@ class CustomARView: ARView, ARSessionDelegate {
                     removePlaneEntities(planeAnchor: planeAnchor)
                     addBox(raycastResult: results[0])
                 }
+            } else {
+                let hits = hitTest(screenLocation, query: .nearest, mask: .all)
+                if hits.count > 0 {
+                    changeBoxColor(hits[0].entity, color: .blue)
+                }
             }
         }
     }
     
     private func addBox(raycastResult: ARRaycastResult) {
         if let planeAnchor = raycastResult.anchor as? ARPlaneAnchor, let anchorEntity = anchorEntitiesByAnchor[planeAnchor] {
-            let box = ModelEntity(mesh: .generateBox(size: 0.1), materials: [SimpleMaterial(color: .red, isMetallic: false)])
+            let size: Float = 0.1
+            let box = ModelEntity(mesh: .generateBox(size: size, cornerRadius: 0), materials: [SimpleMaterial(color: .red, isMetallic: false)])
+            box.collision = .init(shapes: [.generateBox(size: [size, size, size])])
             box.position = raycastResult.worldTransform.position
             anchorEntity.addChild(box)
             placedBox = true
+        }
+    }
+    
+    private func changeBoxColor(_ entity: Entity, color: UIColor) {
+        if let modelEntity = entity as? ModelEntity {
+            modelEntity.model?.materials = [SimpleMaterial(color: color, isMetallic: false)]
         }
     }
     
