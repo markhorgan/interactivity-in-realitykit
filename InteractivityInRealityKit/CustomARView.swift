@@ -8,7 +8,7 @@
 import RealityKit
 import ARKit
 
-class CustomARView: ARView, ARCoachingOverlayViewDelegate, ARSessionDelegate {
+class CustomARView: ARView, ARSessionDelegate {
     private var showARPlanes = true
     private let arPlaneMaterial = SimpleMaterial(color: .init(white: 1.0, alpha: 0.5), isMetallic: false)
     private var anchorEntitiesByAnchor: [ARAnchor: AnchorEntity] = [:]
@@ -65,20 +65,18 @@ class CustomARView: ARView, ARCoachingOverlayViewDelegate, ARSessionDelegate {
     
     private func addCoaching() {
         let coachingOverlay = ARCoachingOverlayView()
-        coachingOverlay.delegate = self
         coachingOverlay.session = session
         coachingOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        coachingOverlay.goal = .anyPlane
+        coachingOverlay.goal = .horizontalPlane
         self.addSubview(coachingOverlay)
     }
     
     private func buildPlaneEntity(planeAnchor: ARPlaneAnchor) -> ModelEntity {
         let geometry = planeAnchor.geometry
-        var descriptor = MeshDescriptor(name: "arPlane")
+        var descriptor = MeshDescriptor(name: "ARPlaneVisualized")
         descriptor.positions = MeshBuffer(geometry.vertices)
         descriptor.primitives = .triangles(geometry.triangleIndices.map { UInt32($0) })
         descriptor.textureCoordinates = MeshBuffer(geometry.textureCoordinates)
         return ModelEntity(mesh: try! .generate(from: [descriptor]), materials: [arPlaneMaterial])
     }
-    
 }
