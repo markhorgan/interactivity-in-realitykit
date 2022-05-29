@@ -95,6 +95,7 @@ class CustomARView: ARView, ARSessionDelegate {
             box.collision = .init(shapes: [.generateBox(size: [size, size, size])])
             box.position = raycastResult.worldTransform.position
             anchorEntity.addChild(box)
+            installGestures(for: box)
             placedBox = true
         }
     }
