@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D4D295A2844063C0098A81C /* ShowTime in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4D29592844063C0098A81C /* ShowTime */; };
 		4D6383E6283F80BC00501D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6383E5283F80BC00501D4C /* AppDelegate.swift */; };
 		4D6383E8283F80BC00501D4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6383E7283F80BC00501D4C /* ContentView.swift */; };
 		4D6383EA283F80BC00501D4C /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 4D6383E9283F80BC00501D4C /* Experience.rcproject */; };
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D4D295A2844063C0098A81C /* ShowTime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +94,9 @@
 			dependencies = (
 			);
 			name = InteractivityInRealityKit;
+			packageProductDependencies = (
+				4D4D29592844063C0098A81C /* ShowTime */,
+			);
 			productName = InteractivityInRealityKit;
 			productReference = 4D6383E2283F80BC00501D4C /* InteractivityInRealityKit.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +125,9 @@
 				Base,
 			);
 			mainGroup = 4D6383D9283F80BC00501D4C;
+			packageReferences = (
+				4D4D29582844063B0098A81C /* XCRemoteSwiftPackageReference "ShowTime" */,
+			);
 			productRefGroup = 4D6383E3283F80BC00501D4C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -355,6 +363,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D4D29582844063B0098A81C /* XCRemoteSwiftPackageReference "ShowTime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KaneCheshire/ShowTime.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D4D29592844063C0098A81C /* ShowTime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D4D29582844063B0098A81C /* XCRemoteSwiftPackageReference "ShowTime" */;
+			productName = ShowTime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4D6383DA283F80BC00501D4C /* Project object */;
 }
